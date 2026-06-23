@@ -435,9 +435,13 @@ ${state.appSource.slice(0,6000)}` : `Be a high-performance coach. Give ACTIONABL
 
     try {
       const tools = state.webPermission ? [{type:"web_search_20250305",name:"web_search"}] : undefined;
-      const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      const resp = await fetch(`https://googleapis.com{process.env.GEMINI_API_KEY}`, {
+
         method:"POST",
-        headers:{"Content-Type":"application/json"},
+        headers:{"headers: {
+  "Content-Type": "application/json"
+},
+},
         body: JSON.stringify({
           model:"claude-sonnet-4-20250514",
           max_tokens: isEdit ? 8000 : 1000,
